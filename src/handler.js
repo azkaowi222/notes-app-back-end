@@ -29,13 +29,14 @@ const getNoteByIdHandler = (req, h) => {
 
 const addNoteHandler = (req, h) => {
   const { title, tags, body } = req.payload;
+  const id = nanoid(16);
   const createdAt = new Date().toISOString();
   const updatedAt = createdAt;
   const newNote = {
     title,
     tags,
     body,
-    id: nanoid(16),
+    id,
     createdAt,
     updatedAt,
   };
@@ -53,6 +54,9 @@ const addNoteHandler = (req, h) => {
     .response({
       status: "success",
       message: "Catatan berhasil ditambahkan",
+      data: {
+        noteId: id,
+      },
     })
     .type("application/json")
     .code(201);
