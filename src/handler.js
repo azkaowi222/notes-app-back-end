@@ -40,7 +40,6 @@ const addNoteHandler = (req, h) => {
     createdAt,
     updatedAt,
   };
-  notes.push(newNote);
   const isSuccess = notes.find((item) => newNote.id === item.id);
   if (!isSuccess) {
     return h
@@ -50,6 +49,7 @@ const addNoteHandler = (req, h) => {
       })
       .code(400);
   }
+  notes.push(newNote);
   return h
     .response({
       status: "success",
